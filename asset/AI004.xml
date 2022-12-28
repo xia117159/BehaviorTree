@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+  <Repeat>
+    <Setters>
+      <Setter Type="Integer" Variable="m_repeat_count" Value="4"/>
+    </Setters>
+    <IfThenElse>
+      <RandomSelector>
+        <Action Name="BT_AI_002::InputNumberValid">
+          <Setters>
+            <Setter Type="Integer" Variable="m_test_id" Value="0"/>
+          </Setters>
+        </Action>
+        <Action Name="BT_AI_002::InputNumberValid">
+          <Setters>
+            <Setter Type="Integer" Variable="m_test_id" Value="1"/>
+          </Setters>
+        </Action>
+        <Action Name="BT_AI_002::InputNumberValid">
+          <Setters>
+            <Setter Type="Integer" Variable="m_test_id" Value="2"/>
+          </Setters>
+        </Action>
+        <Action Name="BT_AI_002::InputNumberValid">
+          <Setters>
+            <Setter Type="Integer" Variable="m_test_id" Value="3"/>
+          </Setters>
+        </Action>
+      </RandomSelector>
+      <Action Name="BT_AI_002::PrintAnything">
+        <Setters>
+          <Setter Type="String" Variable="m_print_prefix" Value="选择器运行成功"/>
+        </Setters>
+      </Action>
+      <Action Name="BT_AI_002::PrintAnything">
+        <Setters>
+          <Setter Type="String" Variable="m_print_prefix" Value="选择器运行失败"/>
+        </Setters>
+      </Action>
+    </IfThenElse>
+  </Repeat>
+</Root>

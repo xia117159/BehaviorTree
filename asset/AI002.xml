@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+  <Retry>
+    <Setters>
+      <Setter Type="Integer" Variable="m_attempts_count" Value="3"/>
+    </Setters>
+    <Sequence>
+      <Action Name="BT_AI_002::InputNumber">
+        <Setters>
+          <Setter Type="Integer" Variable="m_input_min" Value="100"/>
+          <Setter Type="Integer" Variable="m_input_max" Value="2000"/>
+        </Setters>
+        <Mappings>
+          <Item Rule="${input_1}=m_cin_data"/>
+        </Mappings>
+      </Action>
+      <Action Name="BT_AI_002::PrintAnything">
+        <Setters>
+          <Setter Type="String" Variable="m_print_prefix" Value="输入的第一个数字是："/>
+        </Setters>
+        <Mappings>
+          <Item Rule="m_print_data=${input_1}"/>
+        </Mappings>
+      </Action>
+
+      <Repeat>
+        <Setters>
+          <Setter Type="Integer" Variable="m_repeat_count" Value="3"/>
+        </Setters>
+      </Repeat>
+
+      <Delay>
+        <Setters>
+          <Setter Type="Integer" Variable="m_delay_msec" Value="1000"/>
+        </Setters>
+        <Repeat>
+          <Setters>
+            <Setter Type="Integer" Variable="m_repeat_count" Value="1"/>
+          </Setters>
+          <Action Name="BT_AI_002::InputNumber">
+            <Setters>
+              <Setter Type="Integer" Variable="m_input_min" Value="500"/>
+              <Setter Type="Integer" Variable="m_input_max" Value="3000"/>
+            </Setters>
+            <Mappings>
+              <Item Rule="${input_2}=m_cin_data"/>
+            </Mappings>
+          </Action>
+        </Repeat>
+      </Delay>
+
+      <Action Name="BT_AI_002::PrintAnything">
+        <Setters>
+          <Setter Type="String" Variable="m_print_prefix" Value="输入的第二个数字是："/>
+        </Setters>
+        <Mappings>
+          <Item Rule="m_print_data=${input_2}"/>
+        </Mappings>
+      </Action>
+
+      <Inverter>
+        <Action Name="BT_AI_002::SumInput">
+          <Setters>
+            <Setter Type="Integer" Variable="m_sum_other" Value="60"/>
+            <Setter Type="Integer" Variable="m_sum_threshold" Value="1200"/>
+          </Setters>
+          <Mappings>
+            <Item Rule="m_input_one=${input_1}"/>
+            <Item Rule="m_input_two=${input_2}"/>
+            <Item Rule="${cal_sum}=m_sum" Mode="Both"/>
+          </Mappings>
+        </Action>
+      </Inverter>
+
+      <Action Name="BT_AI_002::PrintAnything">
+        <Setters>
+          <Setter Type="String" Variable="m_print_prefix" Value="计算的和为："/>
+        </Setters>
+        <Mappings>
+          <Item Rule="m_print_data=${cal_sum}"/>
+        </Mappings>
+      </Action>
+
+      <Delay>
+        <Setters>
+          <Setter Type="Integer" Variable="m_delay_msec" Value="2000"/>
+        </Setters>
+      </Delay>
+    </Sequence>
+  </Retry>
+</Root>

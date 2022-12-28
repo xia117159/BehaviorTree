@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+  <Repeat>
+    <Setters>
+      <Setter Type="Integer" Variable="m_repeat_count" Value="4"/>
+    </Setters>
+    <IfThenElse>
+      <Action Name="BT_AI_002::InputNumberValid">
+        <Setters>
+          <Setter Type="Integer" Variable="m_test_id" Value="0"/>
+        </Setters>
+      </Action>
+      <Action Name="BT_AI_002::InputNumberValid">
+        <Setters>
+          <Setter Type="Integer" Variable="m_test_id" Value="1"/>
+        </Setters>
+      </Action>
+      <Action Name="BT_AI_002::InputNumberValid">
+        <Setters>
+          <Setter Type="Integer" Variable="m_test_id" Value="2"/>
+        </Setters>
+      </Action>
+    </IfThenElse>
+  </Repeat>
+</Root>

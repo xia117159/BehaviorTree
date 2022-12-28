@@ -1,0 +1,32 @@
+#include "BehaviorTree/include/BehaviorTreeFactory.h"
+{{#header_files}}
+#include "{{header_file_path}}"
+{{/header_files}}
+
+{{#custom_action_node_constructors}}
+{{class_path}}::{{class_name}}(BT::NodeConfiguration& config) : BT::ActionNode(config){
+    {{#setters}}
+    BT_VARIABLE_INIT_BY_SETTING(config.settings, {{setter_name}});
+    {{/setters}}
+    init();
+}
+{{#auto_mapping}}
+void {{class_path}}::inputAutoMapping() {
+    const std::string* mapping_key = nullptr;
+    {{#input_properties}}
+    if (getInputMapping("{{property_name}}", &mapping_key))
+        m_blackboard->get(*mapping_key, {{property_name}});
+    {{/input_properties}}
+    {{#input_with_status_properties}}
+    if (getInputMapping("{{property_name}}", &mapping_key))
+        {{property_name}}_input_status = m_blackboard->get(*mapping_key, {{property_name}});
+    {{/input_with_status_properties}}
+}
+void {{class_path}}::outputAutoMapping(BT::NodeStatus stat) {
+    const BT::OutputMappingItem* mapping_item = nullptr;
+    {{#output_properties}}
+    BT_AUTO_OUTPUT_MAPPING_TEMPLATE({{property_name}}, mapping_item, stat)
+    {{/output_properties}}
+}
+{{/auto_mapping}}
+{{/custom_action_node_constructors}}
